@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections.ObjectModel;
 
 namespace HemligaTalet.Model
 {
@@ -25,16 +26,16 @@ namespace HemligaTalet.Model
         // Egenskaper
         public bool CanMakeGuess
         {
-            get { return Count < MaxNumberOfGuesses; }
+            get { return Count <= MaxNumberOfGuesses; }
         }
 
         protected int Count { get; private set; }
         public int? Number { get { if (CanMakeGuess) { return null; } else { return _number; } } }
         public Outcome Outcome { get; private set; }
 
-        public IEnumerable<int> PreviousGuesses
+        public ReadOnlyCollection<int> PreviousGuesses
         {
-            get { return _previousGuesses; }
+            get { return _previousGuesses.AsReadOnly(); }
         }
 
         // Konstruktor
@@ -47,9 +48,13 @@ namespace HemligaTalet.Model
         // Metoder
         public void Initialize()
         {
+            // Slumpa fram ett tal
             Random _random = new Random();
             _number = _random.Next(1, 101);
             Count = 0;
+
+            // Eventuella element i _previousGuesses tas bort genom anrop av metoden Clear.
+            // Egenskapen Outcome tilldelas värdet Indefinite.
             _previousGuesses.Clear();
             Outcome = Model.Outcome.Indefinite;
         }
@@ -58,7 +63,7 @@ namespace HemligaTalet.Model
         {
             if (guess < 1 || guess > 100)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("Talet måste vara inom det slutna intervallet mellan 1 och 100");
             }
 
             else if (CanMakeGuess)
@@ -78,19 +83,19 @@ namespace HemligaTalet.Model
                 else if (guess < _number)
                 {
                     Outcome = Model.Outcome.Low;
-                    return Model.Outcome.Low;
+                    return Outcome;
                 }
 
                 else if (PreviousGuesses.Contains(guess))
                 {
                     Outcome = Model.Outcome.PreviousGuess;
-                    return Model.Outcome.PreviousGuess;
+                    return Outcome;
                 }
 
                 else
                 {
                     Outcome = Model.Outcome.Correct;
-                    return Outcome.Correct;
+                    return Outcome;
                 }
             }
 
