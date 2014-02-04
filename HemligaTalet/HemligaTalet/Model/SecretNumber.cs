@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Collections.ObjectModel;
 
 namespace HemligaTalet.Model
 {
@@ -33,7 +32,7 @@ namespace HemligaTalet.Model
         public int? Number { get { if (CanMakeGuess) { return null; } else { return _number; } } }
         public Outcome Outcome { get; private set; }
 
-        public ReadOnlyCollection<int> PreviousGuesses
+        public IEnumerable<int> PreviousGuesses
         {
             get { return _previousGuesses.AsReadOnly(); }
         }
