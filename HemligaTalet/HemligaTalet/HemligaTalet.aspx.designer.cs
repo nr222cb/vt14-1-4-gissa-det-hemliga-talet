@@ -76,6 +76,15 @@ namespace HemligaTalet {
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
         
         /// <summary>
+        /// Results control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder Results;
+        
+        /// <summary>
         /// PrevGuessesLabel control.
         /// </summary>
         /// <remarks>

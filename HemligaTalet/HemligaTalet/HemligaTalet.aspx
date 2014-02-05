@@ -25,17 +25,19 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Fältet får inte vara tomt." ControlToValidate="GuessTextBox" Display="Dynamic" SetFocusOnError="True" Text="*"></asp:RequiredFieldValidator>
         <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Talet måste vara mellan 1 och 100." ControlToValidate="GuessTextBox" Display="Dynamic" SetFocusOnError="True" Text="*" Type="Integer" MaximumValue="100" MinimumValue="1"></asp:RangeValidator>         
         
+        <asp:PlaceHolder ID="Results" runat="server" Visible="False">
         <div>
-            <div>
+            <div class="pguesses">
                 <asp:Label ID="PrevGuessesLabel" runat="server" Text=""></asp:Label>
             </div>
-            <div>
+            <div class="status">
                 <asp:Label ID="GuessesStatusLabel" runat="server" Text=""></asp:Label>
             </div>            
             <div>
                 <asp:Button ID="NewNumberButton" runat="server" Text="Slumpa nytt hemligt tal" Visible="False" OnClick="NewNumberButton_Click" />
             </div>
         </div>
+        </asp:PlaceHolder>
     
     </div>
     </form>

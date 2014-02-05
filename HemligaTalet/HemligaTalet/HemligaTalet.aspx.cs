@@ -28,6 +28,8 @@ namespace HemligaTalet
         {
             if (IsValid)
             {
+                Results.Visible = true;
+
                 if (SN.CanMakeGuess)
                 {
                     SN.MakeGuess(int.Parse(GuessTextBox.Text));

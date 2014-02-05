@@ -65,18 +65,19 @@ namespace HemligaTalet.Model
                 throw new ArgumentOutOfRangeException("Talet måste vara inom det slutna intervallet mellan 1 och 100");
             }
 
-            else if (CanMakeGuess)
-            {
-                // Räkna upp antalet gissningar
-                Count++;
-
-                if (PreviousGuesses.Contains(guess))
+            if (PreviousGuesses.Contains(guess))
                 {
                     return Outcome = Model.Outcome.PreviousGuess;
                 }
 
-                // Lägg till gissningen i sparade gissningar
-                _previousGuesses.Add(guess);
+            // Räkna upp antalet gissningar
+            Count++;
+
+            // Lägg till gissningen i sparade gissningar
+            _previousGuesses.Add(guess);
+
+            if (CanMakeGuess)
+            {
 
                 if (guess > _number)
                 {

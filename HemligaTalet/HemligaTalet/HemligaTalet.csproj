@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Error.html" />
     <Content Include="Global.asax" />
     <Content Include="HemligaTalet.aspx" />
     <Content Include="packages.config" />
