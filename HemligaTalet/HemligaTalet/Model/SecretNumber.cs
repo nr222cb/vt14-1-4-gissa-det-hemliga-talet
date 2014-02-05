@@ -25,11 +25,11 @@ namespace HemligaTalet.Model
         // Egenskaper
         public bool CanMakeGuess
         {
-            get { return Count <= MaxNumberOfGuesses; }
+            get { return Count < MaxNumberOfGuesses; }
         }
 
         protected int Count { get; private set; }
-        public int? Number { get { if (CanMakeGuess) { return null; } else { return _number; } } }
+        public int? Number { get { if ((CanMakeGuess) && (Outcome != Model.Outcome.Correct)) { return null; } else { return _number; } } }
         public Outcome Outcome { get; private set; }
 
         public IEnumerable<int> PreviousGuesses
@@ -70,38 +70,34 @@ namespace HemligaTalet.Model
                 // Räkna upp antalet gissningar
                 Count++;
 
+                if (PreviousGuesses.Contains(guess))
+                {
+                    return Outcome = Model.Outcome.PreviousGuess;
+                }
+
                 // Lägg till gissningen i sparade gissningar
                 _previousGuesses.Add(guess);
 
                 if (guess > _number)
                 {
-                    Outcome = Model.Outcome.High;
-                    return Outcome;
+                    return Outcome = Model.Outcome.High;
                 }
-
+                
                 else if (guess < _number)
                 {
-                    Outcome = Model.Outcome.Low;
-                    return Outcome;
+                    return Outcome = Model.Outcome.Low;
                 }
-
-                else if (PreviousGuesses.Contains(guess))
-                {
-                    Outcome = Model.Outcome.PreviousGuess;
-                    return Outcome;
-                }
-
+                
                 else
                 {
-                    Outcome = Model.Outcome.Correct;
-                    return Outcome;
+                    return Outcome = Model.Outcome.Correct;
                 }
+
             }
 
             else
             {
-                Outcome = Model.Outcome.NoMoreGuesses;
-                return Outcome;
+                return Outcome= Model.Outcome.NoMoreGuesses;
             }
         }
 

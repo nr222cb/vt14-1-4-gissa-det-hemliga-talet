@@ -1,0 +1,17 @@
+.container {
+  max-width: 420px;
+  margin-left: 30px;
+}
+
+body {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+div {
+    padding-bottom: 10px;
+    font-size:14px;
+}
+
+h1 {
+    border-bottom:7px solid gray;
+}
